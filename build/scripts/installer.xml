@@ -63,11 +63,21 @@
         <touch file="webapp/WEB-INF/logs/xmldb.log"/>
     </target>
 
+    <target name="copy-custom-apps">
+        <mkdir dir="${apps.dir}"/>
+	<copy todir="${apps.dir}">
+	  <fileset dir="${basedir}/myapps">
+	    <include name="*.xar"/>
+	    <include name="*.xml"/>
+	  </fileset>
+        </copy>
+    </target>
+
     <target name="clean-installer-xars-dir" description="Remove installer apps.dir directory">
         <delete dir="${apps.dir}"/>
     </target>
 
-    <target name="download-xars" description="Download xars to include in installer"  depends="clean-installer-xars-dir">
+    <target name="download-xars" description="Download xars to include in installer"  depends="clean-installer-xars-dir,copy-custom-apps"> 
         <mkdir dir="${apps.dir}"/>
         <echo message="Downloading xar packages to include in installer ..."/>
         <foreach list="${apps}" target="download-xar" param="xar"></foreach>
