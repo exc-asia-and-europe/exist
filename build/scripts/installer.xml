@@ -85,6 +85,7 @@
         <move todir="${apps.dir}">
             <fileset dir="${apps.dir}">
                 <include name="shared*.xar"/>
+                <include name="functx*.xar"/>
             </fileset>
             <mapper type="glob" from="*" to="00*"/>
         </move>
